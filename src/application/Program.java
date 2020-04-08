@@ -22,10 +22,12 @@ public class Program {
 		
 		for(int c=1;c<=m;c++) {
 		System.out.println();
-		System.out.println("Disciplina" + c + ": ");
+		System.out.println("Disciplina #" + c + ": ");
 		sc.nextLine();
 		String disciplina = sc.nextLine();
-		disciplinas.add(new Disciplina(disciplina));
+		System.out.println("Gabarito oficial #" + c + ": ");
+		String gabaritooficial = sc.nextLine();
+		disciplinas.add(new Disciplina(disciplina,gabaritooficial));
 		}
 		
 		System.out.println("Quantos alunos vão ser registrados ?");
@@ -49,11 +51,12 @@ public class Program {
 		System.out.println("Nome: ");
 		String nome = sc.nextLine();
 		alunos.add(new Aluno(gabarito, nome));
-		
+		System.out.println();
 		}
 		
 		
-		String path = "c:\\eclipse\\temp\\" + disciplina + ".txt";
+		String path = "c:\\eclipse\\temp\\" + disciplina.getDisciplina() + ".txt";
+		
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
 			for(Aluno aluno: alunos) {
@@ -63,12 +66,26 @@ public class Program {
 				System.out.println(line);
 			}
 		}
+		
 		catch(IOException e) {
 			e.printStackTrace();
 		}
 		
-	}	
-        sc.close();
-}
+	}
+	for(Disciplina disciplina: disciplinas) {
+		String path1 = "c:\\eclipse\\temp\\" + disciplina.getDisciplina() + "gabaritooficial.txt";
+		try(BufferedWriter bw1 = new BufferedWriter(new FileWriter(path1))){
+			String line1 = disciplina.getGabaritooficial();
+			bw1.write(line1);
+			bw1.newLine();
+			System.out.println(line1);
+		}
+	
+	catch(IOException e) {
+		e.printStackTrace();
+	}
+ }	
+		sc.close();     
+ }
 
 }

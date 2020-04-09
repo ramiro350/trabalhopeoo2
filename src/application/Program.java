@@ -35,11 +35,11 @@ public class Program {
 		
 		
 		System.out.println();
+		
 		for(Disciplina disciplina: disciplinas) {
 			
 		
 		List<Aluno> alunos = new ArrayList<>();
-		
 		
 		
 		for(int i=1;i<=n;i++) {
@@ -53,10 +53,18 @@ public class Program {
 		alunos.add(new Aluno(gabarito, nome));
 		System.out.println();
 		}
+		for(Aluno aluno: alunos) {
+			int nota = 0;
+			for(int p=0;p<10;p++) {
+				if(aluno.getGabarito().charAt(p).equal(disciplina.getGabaritooficial().charAt(p))) {
+					nota = nota + 1;
+				}
+			}
+		}
 		
 		
 		String path = "c:\\eclipse\\temp\\" + disciplina.getDisciplina() + ".txt";
-		
+			
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
 			for(Aluno aluno: alunos) {
@@ -84,7 +92,8 @@ public class Program {
 	catch(IOException e) {
 		e.printStackTrace();
 	}
- }	
+ }
+	
 		sc.close();     
  }
 

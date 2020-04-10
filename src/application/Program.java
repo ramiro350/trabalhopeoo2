@@ -15,6 +15,11 @@ public class Program {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Indique o caminho: ");
+		String absolutepath = sc.nextLine();
+		
+		File file = new File(absolutepath);
 		List<Disciplina> disciplinas = new ArrayList<>();
 		
 		System.out.println("Quantas disciplinas vão ser registradas ?");
@@ -53,17 +58,30 @@ public class Program {
 		alunos.add(new Aluno(gabarito, nome));
 		System.out.println();
 		}
+		
 		for(Aluno aluno: alunos) {
 			int nota = 0;
 			for(int p=0;p<10;p++) {
-				if(aluno.getGabarito().charAt(p).equal(disciplina.getGabaritooficial().charAt(p))) {
+				if(aluno.getGabarito().equals(disciplina.getGabaritooficial())){
 					nota = nota + 1;
 				}
+				System.out.println(nota);
 			}
-		}
+			String path2 = absolutepath + disciplina.getDisciplina() + "ordemalfabética.txt";
+		  try(BufferedWriter bw2 = new BufferedWriter(new FileWriter(path2))){
+				  String line2 = aluno.getNome() + "  " + nota;
+				  bw2.write(line2);
+				  bw2.newLine();
+				  System.out.println(line2);
+			  }
+		  catch(IOException e) {
+			  e.printStackTrace();
+		  }
+		  }
 		
 		
-		String path = "c:\\eclipse\\temp\\" + disciplina.getDisciplina() + ".txt";
+		
+		String path = absolutepath + disciplina.getDisciplina() + ".txt";
 			
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
@@ -81,7 +99,7 @@ public class Program {
 		
 	}
 	for(Disciplina disciplina: disciplinas) {
-		String path1 = "c:\\eclipse\\temp\\" + disciplina.getDisciplina() + "gabaritooficial.txt";
+		String path1 = absolutepath + disciplina.getDisciplina() +  "in.txt";
 		try(BufferedWriter bw1 = new BufferedWriter(new FileWriter(path1))){
 			String line1 = disciplina.getGabaritooficial();
 			bw1.write(line1);

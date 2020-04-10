@@ -5,9 +5,7 @@ public class Aluno {
      private String gabarito;
      private String nome;
      
-     public Aluno() {
-    	 
-     }
+    
      
 	public Aluno(String gabarito, String nome) {
 		this.gabarito = gabarito;
@@ -19,9 +17,7 @@ public class Aluno {
 		return gabarito;
 	}
 	
-	public void setGabarito() {
-		this.gabarito = gabarito;
-	}
+	
 
 
 	public String getNome() {
@@ -33,4 +29,6 @@ public class Aluno {
 		this.nome = nome;
 	}
      
+	
+	
 }

@@ -2,15 +2,20 @@ package entities;
 
 public class Disciplina {
     private String disciplina;
-    private String gabaritooficial;
+    private char[] gabaritooficial = new char[10];
     
     public Disciplina() {
     }
+    
 
-	public Disciplina(String disciplina,String gabaritooficial) {
+
+
+	public Disciplina(String disciplina, char[] gabaritooficial) {
+		super();
 		this.disciplina = disciplina;
 		this.gabaritooficial = gabaritooficial;
 	}
+
 
 	public String getDisciplina() {
 		return disciplina;
@@ -21,9 +26,19 @@ public class Disciplina {
 	}
 	
 	
-	public String getGabaritooficial() {
+
+	public char[] getGabaritooficial() {
 		return gabaritooficial;
 	}
+
+
+
+
+	public void setGabaritooficial(char[] gabaritooficial) {
+		this.gabaritooficial = gabaritooficial;
+	}
+
+
 
 
 	public String toString() {

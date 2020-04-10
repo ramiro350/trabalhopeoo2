@@ -16,10 +16,6 @@ public class Program {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Indique o caminho: ");
-		String absolutepath = sc.nextLine();
-		
-		File file = new File(absolutepath);
 		List<Disciplina> disciplinas = new ArrayList<>();
 		
 		System.out.println("Quantas disciplinas vão ser registradas ?");
@@ -52,7 +48,7 @@ public class Program {
 		System.out.println("Aluno #" + i + ": ");
 		System.out.println("Gabarito: ");
 		sc.nextLine();
-		String gabarito = sc.nextLine();
+		char [] gabarito = sc;
 		System.out.println("Nome: ");
 		String nome = sc.nextLine();
 		alunos.add(new Aluno(gabarito, nome));
@@ -60,16 +56,25 @@ public class Program {
 		}
 		
 		for(Aluno aluno: alunos) {
-			int nota = 0;
-			for(int p=0;p<10;p++) {
-				if(aluno.getGabarito().equals(disciplina.getGabaritooficial())){
-					nota = nota + 1;
-				}
-				System.out.println(nota);
+			if (aluno.respostasIguais()) {  
+				System.out.print(0);
 			}
-			String path2 = absolutepath + disciplina.getDisciplina() + "ordemalfabética.txt";
+			
+	        int count = 0;
+	        char[] gabChars = aluno.getGabarito().replace("\n", "").toCharArray();
+	        for (int p = 0; p < gabChars.length; p++) { 
+	        	if (aluno.getGabarito()[p] == gabChars[p]) { 
+	        		count++;
+	        	   }
+	        	System.out.print(count);
+	              }
+	           
+		      
+	        
+			
+			String path2 = "c:\\temp\\" + disciplina.getDisciplina() + "ordemalfabética.txt";
 		  try(BufferedWriter bw2 = new BufferedWriter(new FileWriter(path2))){
-				  String line2 = aluno.getNome() + "  " + nota;
+				  String line2 = aluno.getNome() + "  " + count;
 				  bw2.write(line2);
 				  bw2.newLine();
 				  System.out.println(line2);
@@ -77,16 +82,17 @@ public class Program {
 		  catch(IOException e) {
 			  e.printStackTrace();
 		  }
-		  }
+		  
+		}	
 		
 		
-		
-		String path = absolutepath + disciplina.getDisciplina() + ".txt";
+		String path = "c:\\temp\\" + disciplina.getDisciplina() + ".txt";
 			
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
 			for(Aluno aluno: alunos) {
-				String line = aluno.getGabarito() + "  " + aluno.getNome();
+				String convert = new String(aluno.getGabarito());
+				String line = convert + "  " + aluno.getNome();
 				bw.write(line);
 				bw.newLine();
 				System.out.println(line);
@@ -98,10 +104,11 @@ public class Program {
 		}
 		
 	}
+
 	for(Disciplina disciplina: disciplinas) {
-		String path1 = absolutepath + disciplina.getDisciplina() +  "in.txt";
+		String path1 = "c:\\temp\\" + disciplina.getDisciplina() +  "in.txt";
 		try(BufferedWriter bw1 = new BufferedWriter(new FileWriter(path1))){
-			String line1 = disciplina.getGabaritooficial();
+			String line1 = new String(disciplina.getGabaritooficial());        
 			bw1.write(line1);
 			bw1.newLine();
 			System.out.println(line1);
